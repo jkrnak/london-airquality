@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import AirQualityContainer from '../../../src/components/AirQualityContainer/AirQualityContainer'
+import MeasurementRow from '../../../src/components/MeasurementRow/MeasurementRow'
 
 describe('<AirQualityContainer/>', () => {
     it('should have a table', () => {
@@ -21,9 +22,26 @@ describe('<AirQualityContainer/>', () => {
        }
     });
 
-    it('shout have an empty body', () => {
-        const wrapper = shallow(<AirQualityContainer/>)
+    it('shout have two MeasurementRows when passing in two items', () => {
+        const measurements = [
+            {
+                name: 'Crouch End',
+                no2: 'low'
+            },
+            {
+                name: 'Oxford Circus',
+                pm10: 'high'
+            }
+        ];
+        const wrapper = shallow(<AirQualityContainer measurements={ measurements }/>);
 
         expect(wrapper.find('table').find('tbody')).to.have.length(1);
+        expect(wrapper.find('table').find('tbody').find(MeasurementRow)).to.have.length(2);
+
+        const measurementRows = wrapper.find('table').find('tbody').find(MeasurementRow);
+        expect(measurementRows.at(0).props().measurement).to.be.equal(measurements[0]);
+        expect(measurementRows.at(0).key()).to.be.equal(measurements[0].name);
+        expect(measurementRows.at(1).props().measurement).to.be.equal(measurements[1]);
+        expect(measurementRows.at(1).key()).to.be.equal(measurements[1].name);
     });
 });
