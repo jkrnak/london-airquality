@@ -14,7 +14,7 @@ export default class MeasurementRow extends React.Component {
 }
 
 MeasurementRow.propTypes = {
-    measurement: PropTypes.objectOf({
+    measurement: PropTypes.shape({
         name: PropTypes.string.isRequired,
         no2: PropTypes.string,
         o3: PropTypes.string,

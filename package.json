@@ -24,7 +24,8 @@
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
-    "webpack-dev-server": "^1.16.3"
+    "webpack-dev-server": "^1.16.3",
+    "whatwg-fetch": "^2.0.2"
   },
   "scripts": {
     "start": "webpack-dev-server --debug --port 8000",

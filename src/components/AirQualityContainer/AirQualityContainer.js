@@ -1,27 +1,51 @@
 import React, { PropTypes } from 'react'
-import MeasurementRow from '../MeasurementRow/MeasurementRow'
+import MeasurementTable from '../MeasurementTable/MeasurementTable'
+import 'whatwg-fetch'
 
 export default class AirQualityContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = props;
+    }
+
+    componentDidMount() {
+        fetch(this.props.source)
+            .then(response => {
+                return response.json();
+            }).then(json => {
+                let measurements = [];
+
+                json.DailyAirQualityIndex.LocalAuthority.forEach(localAuthority => {
+                    if (typeof localAuthority.Site === 'object' && Array.isArray(localAuthority.Site)) {
+                        const site = localAuthority.Site;
+                        site.forEach(siteInfo => {
+                            let measurement = {
+                                name: siteInfo['@SiteName']
+                            };
+
+                            if (typeof siteInfo.Species === 'object' && Array.isArray(siteInfo.Species)) {
+                                console.log('Found species');
+                                siteInfo.Species.forEach(species => {
+                                    console.log(species);
+                                    measurement[species['@SpeciesCode'].toLowerCase()] = species['@AirQualityBand'];
+                                });
+                            }
+
+                            measurements.push(measurement);
+                        });
+                    }
+                });
+
+                return measurements;
+            }).then(measurements => {
+                this.setState(Object.assign({}, this.props, { measurements: measurements }));
+            });
+    }
+
     render() {
-        let measurementRows = this.props.measurements.map((measurement) => {
-            return (<MeasurementRow key={ measurement.name } measurement={ measurement }/>);
-        });
-        return (<div className="air-quality-container">
+        return (<div>
             <h2>Latest air quality of London</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Site</th>
-                        <th>NO<sub>2</sub></th>
-                        <th>O<sub>3</sub></th>
-                        <th>PM10</th>
-                        <th>SO<sub>2</sub></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    { measurementRows }
-                </tbody>
-            </table>
+            <MeasurementTable measurements={ this.state.measurements }/>
         </div>);
     }
 }
@@ -33,9 +57,11 @@ AirQualityContainer.propTypes = {
         o3: PropTypes.string,
         so2: PropTypes.string,
         pm10: PropTypes.string
-    }))
+    })),
+    source: PropTypes.string.isRequired
 };
 
 AirQualityContainer.defaultProps = {
-    measurements: []
+    measurements: [],
+    source: 'http://api.erg.kcl.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/GroupName=London/json'
 };

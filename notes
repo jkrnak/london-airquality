@@ -1,8 +1,0 @@
-component hierarchy
-
-airquality container:
-  measuring point:
-   - lat,lon
-   measurement:
-     - name
-     - level
