@@ -19,16 +19,22 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "babel-polyfill": "^6.22.0",
     "cheerio": "^0.22.0",
     "jsdom": "^9.9.1",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.0",
     "webpack-dev-server": "^1.16.3",
     "whatwg-fetch": "^2.0.2"
   },
   "scripts": {
     "start": "webpack-dev-server --debug --port 8000",
-    "test": "mocha -w test/helpers/browser.js --recursive -R min --watch test/"
+    "test": "mocha test/helpers/browser.js --recursive --reporter spec test/",
+    "test:watch": "yarn test -- --reporter min --watch"
   }
 }

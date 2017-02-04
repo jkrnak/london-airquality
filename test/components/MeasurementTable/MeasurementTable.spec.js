@@ -17,7 +17,7 @@ describe('<MeasurementTable/>', () => {
         }
     });
 
-    it('shout have two MeasurementRows when passing in two items', () => {
+    it('should have two MeasurementRows when passing in two items', () => {
         const measurements = [
             {
                 name: 'Crouch End',

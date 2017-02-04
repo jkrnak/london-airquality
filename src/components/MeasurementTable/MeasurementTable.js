@@ -36,5 +36,5 @@ MeasurementTable.propTypes = {
 };
 
 MeasurementTable.defaultProps = {
-    measurements: [],
+    measurements: []
 };
