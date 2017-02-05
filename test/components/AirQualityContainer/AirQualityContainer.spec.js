@@ -7,7 +7,17 @@ import MeasurementTable from '../../../src/components/MeasurementTable/Measureme
 
 describe('<AirQualityContainer/>', () => {
     it('should have a MeasurementTable', () => {
-       const wrapper = shallow(<AirQualityContainer/>);
-       expect(wrapper.find(MeasurementTable)).to.have.length(1);
+        const wrapper = shallow(<AirQualityContainer isFetching={ false }/>);
+        expect(wrapper.find(MeasurementTable)).to.have.length(1);
+    });
+
+    it('should have a loader animation while fetching', () => {
+        const wrapper = shallow(<AirQualityContainer isFetching={ true }/>)
+        expect(wrapper.find('div[className="preloader-wrapper active small"]')).to.have.length(1);
+    });
+
+    it('should hide the animation when fetching has finished', () => {
+        const wrapper = shallow(<AirQualityContainer isFetching={ false }/>)
+        expect(wrapper.find('div[className="preloader-wrapper active small"]')).to.have.length(0);
     });
 });

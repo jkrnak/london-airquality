@@ -1,0 +1,17 @@
+$color-very-high: #cc3300;
+$color-high: #ff9966;
+$color-moderate: #ffcc00;
+$color-low: #99cc33;
+
+td.low {
+  background-color: $color-low;
+}
+td.moderate {
+  background-color: $color-moderate;
+}
+td.high {
+  background-color: $color-high;
+}
+td.very-high {
+  background-color: $color-very-high;
+}

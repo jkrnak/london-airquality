@@ -6,7 +6,7 @@ export default function MeasurementTable(props) {
         return (<MeasurementRow key={ measurement.name } measurement={ measurement }/>);
     });
     return (
-        <table>
+        <table className="striped">
             <thead>
             <tr>
                 <th>Site</th>

@@ -1,16 +1,24 @@
 import React, { PropTypes } from 'react'
 
 export default function MeasurementRow(props) {
+    const levelToClassName = (level) => {
+        if (typeof level === "string") {
+            return level.replace(/\s/, '-').toLocaleLowerCase();
+        }
+        return null;
+    };
+
     return (<tr>
             <td>{ props.measurement.name }</td>
-            <td>{ props.measurement.no2 }</td>
-            <td>{ props.measurement.o3 }</td>
-            <td>{ props.measurement.pm10 }</td>
-            <td>{ props.measurement.pm25 }</td>
-            <td>{ props.measurement.so2 }</td>
+            <td className={ levelToClassName(props.measurement.no2) }>{ props.measurement.no2 }</td>
+            <td className={ levelToClassName(props.measurement.o3) }>{ props.measurement.o3 }</td>
+            <td className={ levelToClassName(props.measurement.pm10) }>{ props.measurement.pm10 }</td>
+            <td className={ levelToClassName(props.measurement.pm25) }>{ props.measurement.pm25 }</td>
+            <td className={ levelToClassName(props.measurement.so2) }>{ props.measurement.so2 }</td>
         </tr>
     );
 }
+
 
 MeasurementRow.propTypes = {
     measurement: PropTypes.shape({
