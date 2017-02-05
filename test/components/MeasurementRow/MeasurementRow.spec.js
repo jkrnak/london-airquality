@@ -15,16 +15,18 @@ describe('<MeasurementRow/>', () => {
             no2: "low",
             pm10: "medium",
             so2: "high",
-            o3: "extreme"
+            o3: "extreme",
+            pm25: "moderate"
         }
         const wrapper = mount(<MeasurementRow measurement={ measurement }/>, {
             'attachTo': tableBody
         });
 
         expect(wrapper.find('td').at(0).text()).to.equal('Crouch End');
-        expect(wrapper.find('td').at(1).text()).to.equal('low');
-        expect(wrapper.find('td').at(2).text()).to.equal('medium');
-        expect(wrapper.find('td').at(3).text()).to.equal('high');
-        expect(wrapper.find('td').at(4).text()).to.equal('extreme');
+        expect(wrapper.find('td').at(1).text()).to.equal('low'); // no2
+        expect(wrapper.find('td').at(2).text()).to.equal('extreme'); //o3
+        expect(wrapper.find('td').at(3).text()).to.equal('medium'); // pm10
+        expect(wrapper.find('td').at(4).text()).to.equal('moderate'); // pm25
+        expect(wrapper.find('td').at(5).text()).to.equal('high'); //so2
     });
 });

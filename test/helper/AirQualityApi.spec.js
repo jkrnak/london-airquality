@@ -40,6 +40,13 @@ const API_RESPONSE = {
                                 "@AirQualityIndex": "2",
                                 "@AirQualityBand": "Medium",
                                 "@IndexSource": "Measurement"
+                            },
+                            {
+                                "@SpeciesCode": "PM25",
+                                "@SpeciesDescription": "PM2.5 Particulate",
+                                "@AirQualityIndex": "1",
+                                "@AirQualityBand": "Low",
+                                "@IndexSource": "Measurement"
                             }
                         ]
                     }
@@ -112,7 +119,8 @@ describe('AirQualityApi', () => {
             {
                 name: 'Barking and Dagenham - Scrattons Farm',
                 no2: 'Low',
-                pm10: 'Medium'
+                pm10: 'Medium',
+                pm25: 'Low'
             },
             {
                 name: 'Kensington and Chelsea - North Ken'

@@ -13,6 +13,7 @@ export default function MeasurementTable(props) {
                 <th>NO<sub>2</sub></th>
                 <th>O<sub>3</sub></th>
                 <th>PM10</th>
+                <th>PM25</th>
                 <th>SO<sub>2</sub></th>
             </tr>
             </thead>
@@ -24,13 +25,7 @@ export default function MeasurementTable(props) {
 }
 
 MeasurementTable.propTypes = {
-    measurements: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        no2: PropTypes.string,
-        o3: PropTypes.string,
-        so2: PropTypes.string,
-        pm10: PropTypes.string
-    }))
+    measurements: PropTypes.arrayOf(MeasurementRow.propTypes.measurement)
 };
 
 MeasurementTable.defaultProps = {

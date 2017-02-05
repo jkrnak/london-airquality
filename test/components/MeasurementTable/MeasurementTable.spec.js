@@ -6,11 +6,11 @@ import MeasurementTable from '../../../src/components/MeasurementTable/Measureme
 import MeasurementRow from '../../../src/components/MeasurementRow/MeasurementRow'
 
 describe('<MeasurementTable/>', () => {
-    it('should have a header row with with headers named: Site, NO2, O3, PM10, SO2', () => {
+    it('should have a header row with with headers named: Site, NO2, O3, PM10, PM25, SO2', () => {
         const wrapper = shallow(<MeasurementTable/>);
         expect(wrapper.find('table').find('thead').find('tr')).to.have.length(1);
         const headRow = wrapper.find('table').find('thead').find('tr');
-        const expectedHeaders = ['Site', 'NO2', 'O3', 'PM10', 'SO2'];
+        const expectedHeaders = ['Site', 'NO2', 'O3', 'PM10', 'PM25', 'SO2'];
 
         for (let i = 0; i < expectedHeaders.length; i++) {
             expect(headRow.find('th').at(i).text()).to.have.string(expectedHeaders[i]);

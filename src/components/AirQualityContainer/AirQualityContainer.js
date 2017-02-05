@@ -10,13 +10,7 @@ export function AirQualityContainer(props)  {
 }
 
 AirQualityContainer.propTypes = {
-    measurements: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        no2: PropTypes.string,
-        o3: PropTypes.string,
-        so2: PropTypes.string,
-        pm10: PropTypes.string
-    }))
+    measurements: MeasurementTable.propTypes.measurements
 };
 
 AirQualityContainer.defaultProps = {
