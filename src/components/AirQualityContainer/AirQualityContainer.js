@@ -2,13 +2,11 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import MeasurementTable from '../MeasurementTable/MeasurementTable'
 
-export class AirQualityContainer extends React.Component {
-    render() {
-        return (<div>
-            <h2>Latest air quality of London</h2>
-            <MeasurementTable measurements={ this.props.measurements } isFetching={ this.props.isFetching }/>
-        </div>);
-    }
+export function AirQualityContainer(props)  {
+    return (<div>
+        <h2>Latest air quality of London</h2>
+        <MeasurementTable measurements={ props.measurements } isFetching={ props.isFetching }/>
+    </div>);
 }
 
 AirQualityContainer.propTypes = {
