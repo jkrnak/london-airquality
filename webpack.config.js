@@ -1,8 +1,17 @@
+const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
     template: './src/index.html',
     filename: 'index.html',
     inject: 'body'
+});
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractTextPluginConfig = new ExtractTextPlugin('[name].css');
+
+const definePluginConfig = new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
 });
 
 module.exports = {
@@ -23,7 +32,12 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: ["style-loader", "css-loader", "resolve-url-loader?keepQuery", "sass-loader?sourceMap"]
+                loaders: (process.env.NODE_ENV === 'production' ?
+                    ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: ['css-loader', 'resolve-url-loader?keepQuery', 'sass-loader?sourceMap']
+                    })
+                    : ['style-loader', 'css-loader', 'resolve-url-loader?keepQuery', 'sass-loader?sourceMap'])
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -35,7 +49,11 @@ module.exports = {
             }
         ]
     },
-    plugins: [HtmlWebpackPluginConfig],
+    plugins: [
+        definePluginConfig,
+        htmlWebpackPluginConfig,
+        extractTextPluginConfig
+    ],
     externals: {
         'cheerio': 'window',
         'react/lib/ExecutionEnvironment': true,
